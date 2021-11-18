@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Person } from './person.model';
 
 @Component({
@@ -9,9 +9,19 @@ import { Person } from './person.model';
 })
 export class AppComponent {
   person: Person = new Person();
+  regForm: FormGroup;
 
-  onSubmit(form: NgForm) {
-    Object.assign(this.person, form.value);
+  ngOnInit() {
+    this.regForm = new FormGroup({
+      firstname: new FormControl(),
+      lastname: new FormControl(),
+      email: new FormControl(),
+    });
+  }
+
+  onSubmit() {
+    console.log(this.regForm.value);
+    Object.assign(this.person, this.regForm.value);
     console.log(this.person);
   }
 }
