@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Person } from './person.model';
 
 @Component({
@@ -14,8 +14,8 @@ export class AppComponent {
   ngOnInit() {
     this.regForm = new FormGroup({
       firstname: new FormControl(),
-      lastname: new FormControl(),
-      email: new FormControl(),
+      lastname: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
     });
   }
 
